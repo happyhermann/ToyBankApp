@@ -153,12 +153,20 @@ header > h3 {
   font-weight: 400;
 }
 
+.profile:hover {
+  cursor: pointer;
+}
+
 .icons {
   display: flex;
   align-items: center;
   width: 20px;
   height: 20px;
   margin-right: 30px;
+}
+
+.icons:hover {
+  cursor: pointer;
 }
 
 .scanner {
@@ -193,6 +201,10 @@ header > h3 {
   font-weight: 300;
 }
 
+.balance_Top_h4:hover {
+  cursor: pointer;
+}
+
 .balance_Top_transfer > h3 {
   color: #858585;
 }
@@ -225,6 +237,7 @@ header > h3 {
 .advertise h4 {
   display: inline-block;
   margin-right: 5px;
+  margin-bottom: 25px;
 }
 
 .advertise a {
@@ -234,14 +247,19 @@ header > h3 {
 /* scroll */
 
 .scroll {
+  overflow: scroll;
   position: relative;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
-  background-color: white;
+  background: #f5f5f5;
   width: auto;
   height: 50vh;
   border-radius: 30px 30px 0px 0px;
   box-shadow: 0px -5px 14px rgba(189, 144, 28, 0.08);
+}
+
+.scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .upScroll {
@@ -264,18 +282,76 @@ header > h3 {
 .saving_list_goal {
   font-size: 12px;
   font-weight: 400;
-  background-color: red;
   width: 162px;
   height: 47px;
   margin-right: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   color: white;
+  background: #dadada;
   line-height: 18px;
   border-radius: 6px 0px 0px 6px;
 }
 
+.saving_list_goal:hover {
+  cursor: pointer;
+}
+
+.saving_list_goal_progress {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: auto;
+  margin-left: 9px;
+  height: 47px;
+  /* background-color: blue; */
+}
+
+.history {
+  display: flex;
+  flex-direction: column;
+  height: 1000vh;
+  padding: 17px 18px;
+  font-weight: 300;
+}
+
+.history_day {
+  padding: 3px 17px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.history_date {
+  font-size: 14px;
+}
+
+.history_spending {
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 21px;
+
+  /* identical to box height */
+}
+
+.lists {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #dcdcdc;
+  padding: 3px 17px;
+}
+
+.lists span:first-child {
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 27px;
+}
+
+.lists span:last-child {
+  color: #444444;
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 27px;
+}
 /* footer */
 .buttons_container {
   display: flex;
@@ -299,3 +375,32 @@ header > h3 {
   width: 24px;
   height: 15px;
 }
+
+.button:hover {
+  cursor: pointer;
+}
+
+::-webkit-scrollbar {
+  width: 5.2px;
+} /* 스크롤 바 */
+
+::-webkit-scrollbar-track {
+  background-color: #fff;
+} /* 스크롤 바 밑의 배경 */
+
+::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 10px;
+} /* 실질적 스크롤 바 */
+
+::-webkit-scrollbar-thumb:hover {
+  background: #404040;
+} /* 실질적 스크롤 바 위에 마우스를 올려다 둘 때 */
+
+::-webkit-scrollbar-thumb:active {
+  background: #808080;
+} /* 실질적 스크롤 바를 클릭할 때 */
+
+::-webkit-scrollbar-button {
+  display: none;
+} /* 스크롤 바 상 하단 버튼 */
