@@ -124,7 +124,13 @@ table {
   border-spacing: 0;
 }
 
+a {
+  text-decoration: none;
+  color: darkgray;
+}
+
 body {
+  display: flex;
   font-family: "Noto Sans KR", sans-serif;
   background: #e5e5e5;
 }
@@ -133,7 +139,7 @@ body {
 
 section {
   width: 375px;
-  height: 812px;
+  height: 840px;
   margin-top: 50px;
   margin-left: 50px;
   background: #eeece5;
@@ -153,6 +159,10 @@ header > h3 {
   font-weight: 400;
 }
 
+main {
+  position: relative;
+}
+
 .profile:hover {
   cursor: pointer;
 }
@@ -163,6 +173,7 @@ header > h3 {
   width: 20px;
   height: 20px;
   margin-right: 30px;
+  position: relative;
 }
 
 .icons:hover {
@@ -171,6 +182,17 @@ header > h3 {
 
 .scanner {
   margin-right: 13px;
+}
+
+.scannerSide {
+  content: ">";
+  font-size: 40px;
+  position: absolute;
+  color: darkgray;
+  font-weight: 800;
+  right: -60px;
+  bottom: -120px;
+  z-index: 3;
 }
 
 .balance {
@@ -278,15 +300,20 @@ header > h3 {
 /* scroll */
 
 .scroll {
+  position: absolute;
   overflow: scroll;
-  position: relative;
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   background: #f5f5f5;
-  width: auto;
-  height: 50vh;
+  width: 100%;
+  height: 530px;
+  z-index: 1;
   border-radius: 30px 30px 0px 0px;
   box-shadow: 0px -5px 14px rgba(189, 144, 28, 0.08);
+}
+
+.upScroll {
+  cursor: pointer;
 }
 
 .scroll::-webkit-scrollbar {
@@ -308,6 +335,8 @@ header > h3 {
 .saving_list {
   padding: 17px 18px;
   display: flex;
+  overflow: scroll;
+  overflow-y: hidden;
 }
 
 .saving_list_goal {
@@ -320,6 +349,10 @@ header > h3 {
   background: #dadada;
   line-height: 18px;
   border-radius: 6px 0px 0px 6px;
+}
+
+.saving_list::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
 }
 
 .saving_list_goal:hover {
@@ -350,9 +383,10 @@ header > h3 {
 .history {
   display: flex;
   flex-direction: column;
-  height: 1000vh;
+  overflow: hidden;
   padding: 17px 18px;
   font-weight: 300;
+  height: 15000px;
 }
 
 .history_day {
@@ -407,6 +441,12 @@ header > h3 {
   background: linear-gradient(163.63deg, #00bdb2 11.35%, #c4e7b8 139.96%);
 }
 
+.buttons {
+  position: relative;
+  transform: translateY(530px);
+  z-index: 1;
+}
+
 .button {
   padding: 20px 30px;
   width: 24px;
@@ -427,27 +467,126 @@ header > h3 {
   cursor: pointer;
 }
 
-::-webkit-scrollbar {
-  width: 5.2px;
-} /* 스크롤 바 */
+/* 지출 관리 */
 
-::-webkit-scrollbar-track {
-  background-color: #fff;
-} /* 스크롤 바 밑의 배경 */
+.second_section {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 910px;
+}
 
-::-webkit-scrollbar-thumb {
-  background: #ddd;
-  border-radius: 10px;
-} /* 실질적 스크롤 바 */
+.second_section_header {
+  display: flex;
+  justify-content: right;
+  margin-right: 50px;
+  font-size: 20px;
+}
 
-::-webkit-scrollbar-thumb:hover {
-  background: #404040;
-} /* 실질적 스크롤 바 위에 마우스를 올려다 둘 때 */
+.second_section_header {
+  text-align: right;
+}
 
-::-webkit-scrollbar-thumb:active {
-  background: #808080;
-} /* 실질적 스크롤 바를 클릭할 때 */
+.manage_container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
 
-::-webkit-scrollbar-button {
-  display: none;
-} /* 스크롤 바 상 하단 버튼 */
+.manage_container > h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.second_section .progressBar {
+  width: 300px;
+}
+
+.set_standard {
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  margin-bottom: 23px;
+  transform: translateY(30px);
+}
+
+.set_standard {
+  transform: translateY(30px);
+}
+
+.second_section .progressBar {
+  transform: translateY(40px);
+}
+
+.set_standard span:nth-child(1) {
+  font-size: 18px;
+}
+
+.set_standard span:nth-child(2) {
+  font-size: 24px;
+}
+
+.second_section main {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.daily_report {
+  padding: 0px 15px;
+  margin-bottom: 60px;
+  transform: translateY(80px);
+  font-size: 20px;
+}
+
+.daily_report img {
+  transform: translateY(40px);
+}
+
+.monthly_pattern {
+  transform: translateY(-30px);
+}
+
+.monthly_pattern {
+  transform: translateY(150px);
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+
+.monthly_pattern_text {
+  margin-bottom: 20px;
+  overflow: hidden;
+  font-size: 25px;
+}
+
+.second_section footer {
+  width: 100%;
+  transform: translateY(45px);
+}
+
+/* 의민이 할머니 goals */
+
+.son {
+  background: #0a73c3;
+}
+
+.son2 {
+  background: #eeba00;
+}
+
+.grandma {
+  background: skyblue;
+}
+
+.grandma2 {
+  background: #005f59;
+}
+
+.creLi {
+  display: flex;
+  justify-content: space-between;
+}

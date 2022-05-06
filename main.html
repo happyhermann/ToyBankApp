@@ -3,21 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ToyBank</title>
+     <title>ToyBank</title>
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" /> 
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    
+  
  
  </head>
 <body>  
 
   
-    <section class="bankApp">
+    <section class="bankApp second_bank">
             <header>
                 <div class="profile">
                     <img src="/images/아바타.svg" alt="Your Profile Image"/>
@@ -26,9 +23,10 @@
                 <ul class="icons">
                     <li class="scanner"><img src="/images/Vector.svg" alt="QR icon"/></li>
                     <li class="search"><img src="/images/search.svg" alt="Search icon"/></li>
+                    <span class="scannerSide"><a href="/son.html">></a></span>
                 </ul>
             </header>
-            <main>
+            <main class="main">
             <div class="balance">
                 <div class="balance_Top">
                     <div class="balance_Top_transfer">
@@ -41,9 +39,9 @@
                             <div id="progressBar" class="progressBar">
                                 <div class="progressBar_percent"></div>
                             </div>
-                            <img class="progressBar_graph" src="/images/graph.svg" alt="graph"/>
+                            <a href="/manage.html"><img class="progressBar_graph" src="/images/graph.svg" alt="graph"/></a>
                         </div>
-                        <h5>5일 동안 210,000원 남음</h5>
+                        <h5 class="showUp">5일 동안 210,000원 남음</h5>
                     </div> 
                 </div>
                 <div class="balance_Bottom">
@@ -56,34 +54,36 @@
                 <button class="upScroll"></button>
                 <ul class="saving_list">
                     <li class="saving_list_goal">
-                        <div class="saving_list_goal_progress first">
+                        <div class="saving_list_goal_progress first son">
                              <p>여행가자!</p>
                              <p>840,000원</p>
                         </div>
                     </li>
+                    <li class="saving_list_goal arrowSide">
+                        <div class="saving_list_goal_progress second son2">
+                             <p >냉장고 사기</p>
+                             <p>144,000원</p>
+                        </div>     
+                    </li>    
                     <li class="saving_list_goal">
                         <div class="saving_list_goal_progress second">
                              <p>냉장고 사기</p>
                              <p>144,000원</p>
                         </div>     
+                    </li>   
+                    <li class="saving_list_goal">
+                        <div class="saving_list_goal_progress second">
+                             <p>냉장고 사기</p>
+                             <p>144,000원</p>
+                        </div>     
+                    </li>     
                 </ul>
                 <ul class="history">
                     <li class="history_day">
                         <span class="history_date">오늘</span>
-                        <span class="history_spending">127,6000원 지출</span>
+                        <span class="history_spending"></span>
                     </li>
-                    <li class="lists"><span>미스터피자</span><span>32,000원</span></li>
-                    <li class="lists"><span>택시</span><span>4,800원</span></li>
-                    <li class="lists"><span>이마트</span><span>86,000원</span></li>
-                    <li class="lists"><span>ㅇㅇㅇ</span><span>ㅇㅇㅇ</span></li>
-                    <li class="lists"><span>ㅇㅇㅇ</span><span>ㅇㅇㅇ</span></li>
-                    <li class="lists"><span>ㅇㅇㅇ</span><span>ㅇㅇㅇ</span></li>
-                    <li class="lists"><span>ㅇㅇㅇ</span><span>ㅇㅇㅇ</span></li><li class="lists"><span>ㅇㅇㅇ</span><span>ㅇㅇㅇ</span></li>
-                    <li class="lists"><span>ㅇㅇㅇ</span><span>ㅇㅇㅇ</span></li><li class="lists"><span>ㅇㅇㅇ</span><span>ㅇㅇㅇ</span></li>
-                    <li class="lists"><span>ㅇㅇㅇ</span><span>ㅇㅇㅇ</span></li><li class="lists"><span>ㅇㅇㅇ</span><span>ㅇㅇㅇ</span></li>
-                    <li class="lists"><span>ㅇㅇㅇ</span><span>ㅇㅇㅇ</span></li>
-                    <li class="lists"><span>ㅇㅇㅇ</span><span>ㅇㅇㅇ</span></li>
-                    <li class="lists"><span>ㅇㅇㅇ</span><span>ㅇㅇㅇ</span></li>
+                    
                 </ul>
             </div>
             </main>
@@ -99,6 +99,262 @@
             </ul>
             </footer>
     </section>
+    <!-- <section class="bankApp second_section">
+        <header class="second_section_header">
+            <p>닫기</p>
+        </header>    
+        <div class="manage_container">
+            <h3 class="manage_spending">지출관리</h3>
+            <div class="set_standard">
+                 <span>기준금액설정</span>
+                 <span>2,100,000원</span>
+            </div>
+            <div class="bar">
+                <div id="progressBar" class="progressBar">
+                    <div class="progressBar_percent"></div>
+                </div>
+             </div>
+        </div>     
+        
+        <main>
+          <div class="daily_report">
+            <h3 class="daily_report_text">일간 리포트</h3>
+            <img src="/images/년간 그래프.svg"/>
+         </div>
+         <div class="monthly_pattern">
+          <h3 class="monthly_pattern_text">6월 지출 패턴</h3>
+          <img src="/images/Group 40.svg"/>
+          </div>
+        </main>
+        <footer class="buttons">
+        <ul class="buttons_container">
+            <li class="button"><img src="/images/home.svg" alt="Home Button"></li>
+            <li class="button">
+                <img src="/images/SkypeArrow/SkypeArrow/F748/Vector.svg" alt="Transfer">
+                <img src="/images/SkypeArrow/F748/Vector.svg" alt="Transfer">
+            </li>
+            <li class="button"><img src="/images/SkypeMessage/EF83/Vector.svg" alt="Chat"></li>
+            <li class="button"><img src="/images/More/E712/Vector.svg" alt="More"></li>
+        </ul>
+        </footer>
+    </section> -->
+<!-- <section class="bankApp second_bank">
+    <header>
+        <div class="profile">
+            <img src="/images/의민.svg" alt="Your Profile Image"/>
+        </div>
+        <h3>의민이 용돈</h3>
+        <ul class="icons">
+            <li class="scanner"><img src="/images/Vector.svg" alt="QR icon"/></li>
+            <li class="search"><img src="/images/search.svg" alt="Search icon"/></li>
+        </ul>
+    </header>
+    <main>
+    <div class="balance">
+        <div class="balance_Top">
+            <div class="balance_Top_transfer">
+                <h3>355-67877-78773</h3>
+                <h4 class="balance_Top_h4">이체</h4>
+            </div> 
+            <strong>1,240,000원</strong>
+            <div class="balance_Top_left">
+                <div class="bar">
+                    <div id="progressBar" class="progressBar">
+                        <div class="progressBar_percent"></div>
+                    </div>
+                    <img class="progressBar_graph" src="/images/graph.svg" alt="graph"/>
+                </div>
+                <h5>5일 동안 210,000원 남음</h5>
+            </div> 
+        </div>
+        <div class="balance_Bottom">
+        </div>
+        <div class="advertise">
+            <h4>지금 낮은 이자로 생활대출을 신청하세요!</h4><a href="#">Go</a>
+        </div>
+    </div>
+    <div class="scroll">
+        <button class="upScroll"></button>
+        <ul class="saving_list">
+            <li class="saving_list_goal">
+                <div class="saving_list_goal_progress first grandma">
+                     <p>게임기^^</p>
+                     <p>142,000원</p>
+                </div>
+            </li>
+            <li class="saving_list_goal">
+                <div class="saving_list_goal_progress second grandma2">
+                     <p>기부 실천!</p>
+                     <p>82,200원</p>
+                </div>     
+            </li>    
+            <li class="saving_list_goal">
+                <div class="saving_list_goal_progress second">
+                     <p>냉장고 사기</p>
+                     <p>144,000원</p>
+                </div>     
+            </li>   
+            <li class="saving_list_goal">
+                <div class="saving_list_goal_progress second">
+                     <p>냉장고 사기</p>
+                     <p>144,000원</p>
+                </div>     
+            </li>     
+        </ul>
+        <ul class="history">
+            <li class="history_day">
+                <span class="history_date">오늘</span>
+                <span class="history_spending"></span>
+            </li>
+            <li class="lists"><span>미스터피자</span><span>32,000원</span></li>
+            <li class="lists"><span>택시</span><span>4,800원</span></li>
+            <li class="lists"><span>이마트</span><span>86,000원</span></li>
+           
+           
+            
+        </ul>
+    </div>
+    </main>
+    <footer class="buttons">
+    <ul class="buttons_container">
+        <li class="button"><img src="/images/home.svg" alt="Home Button"></li>
+        <li class="button">
+            <img src="/images/SkypeArrow/SkypeArrow/F748/Vector.svg" alt="Transfer">
+            <img src="/images/SkypeArrow/F748/Vector.svg" alt="Transfer">
+        </li>
+        <li class="button"><img src="/images/SkypeMessage/EF83/Vector.svg" alt="Chat"></li>
+        <li class="button"><img src="/images/More/E712/Vector.svg" alt="More"></li>
+    </ul>
+    </footer>
+</section>
+<section class="bankApp second_bank">
+    <header>
+        <div class="profile">
+            <img src="/images/grand.svg" alt="Your Profile Image"/>
+        </div>
+        <h3>할머니 계좌</h3>
+        <ul class="icons">
+            <li class="scanner"><img src="/images/Vector.svg" alt="QR icon"/></li>
+            <li class="search"><img src="/images/search.svg" alt="Search icon"/></li>
+        </ul>
+    </header>
+    <main>
+    <div class="balance">
+        <div class="balance_Top">
+            <div class="balance_Top_transfer">
+                <h3>355-67877-78773</h3>
+                <h4 class="balance_Top_h4">이체</h4>
+            </div> 
+            <strong>1,240,000원</strong>
+            <div class="balance_Top_left">
+                <div class="bar">
+                    <div id="progressBar" class="progressBar">
+                        <div class="progressBar_percent"></div>
+                    </div>
+                    <img class="progressBar_graph" src="/images/graph.svg" alt="graph"/>
+                </div>
+                <h5>5일 동안 210,000원 남음</h5>
+            </div> 
+        </div>
+        <div class="balance_Bottom">
+        </div>
+        <div class="advertise">
+            <h4>지금 낮은 이자로 생활대출을 신청하세요!</h4><a href="#">Go</a>
+        </div>
+    </div>
+    <div class="scroll">
+        <button class="upScroll"></button>
+        <ul class="saving_list">
+            <li class="saving_list_goal">
+                <div class="saving_list_goal_progress first">
+                     <p>딸 냉장고</p>
+                     <p>545,000원</p>
+                </div>
+            </li>
+            <li class="saving_list_goal">
+                <div class="saving_list_goal_progress second">
+                     <p>아들 컴퓨터</p>
+                     <p>432,000원</p>
+                </div>     
+            </li>    
+            <li class="saving_list_goal">
+                <div class="saving_list_goal_progress second">
+                     <p>냉장고 사기</p>
+                     <p>144,000원</p>
+                </div>     
+            </li>   
+            <li class="saving_list_goal">
+                <div class="saving_list_goal_progress second">
+                     <p>냉장고 사기</p>
+                     <p>144,000원</p>
+                </div>     
+            </li>     
+        </ul>
+        <ul class="history">
+            <li class="history_day">
+                <span class="history_date">오늘</span>
+                <span class="history_spending">127,6000원 지출</span>
+            </li>
+            <li class="lists"><span>미스터피자</span><span>32,000원</span></li>
+            <li class="lists"><span>택시</span><span>4,800원</span></li>
+            <li class="lists"><span>이마트</span><span>86,000원</span></li>
+          
+            
+            
+        </ul>
+    </div>
+    </main>
+    <footer class="buttons">
+    <ul class="buttons_container">
+        <li class="button"><img src="/images/home.svg" alt="Home Button"></li>
+        <li class="button">
+            <img src="/images/SkypeArrow/SkypeArrow/F748/Vector.svg" alt="Transfer">
+            <img src="/images/SkypeArrow/F748/Vector.svg" alt="Transfer">
+        </li>
+        <li class="button"><img src="/images/SkypeMessage/EF83/Vector.svg" alt="Chat"></li>
+        <li class="button"><img src="/images/More/E712/Vector.svg" alt="More"></li>
+    </ul>
+    </footer>
+</section>     -->
+     
+<!-- 
+    <section class="manage">
+         <header class="manage_header">
+             <span>닫기</span>
+         </header>
+         <div class="set_standard">
+             <h3>지출 관리</h3>
+             <span>기준금액설정</span>
+             <span>2,100,000원</span>
+         </div>
+         <div class="bar">
+            <div id="progressBar" class="progressBar">
+                <div class="progressBar_percent"></div>
+            </div>
+            <img class="progressBar_graph" src="/images/graph.svg" alt="graph"/>
+        </div>
+        <main class="daily_report">
+            <div class="daily_report_graph">
+                <img src="#" alt="report_graph" >
+            </div>
+            <div class="spending_pattern">
+              <h3>6월 지출 패턴</h3>
+              <img src="#" alt="circle graph"/>
+            </div>
+        </main>
+        <footer class="manage_buttons">
+            <ul class="buttons_container">
+                <li class="button"><img src="/images/home.svg" alt="Home Button"></li>
+                <li class="button">
+                    <img src="/images/SkypeArrow/SkypeArrow/F748/Vector.svg" alt="Transfer">
+                    <img src="/images/SkypeArrow/F748/Vector.svg" alt="Transfer">
+                </li>
+                <li class="button"><img src="/images/SkypeMessage/EF83/Vector.svg" alt="Chat"></li>
+                <li class="button"><img src="/images/More/E712/Vector.svg" alt="More"></li>
+            </ul>
+            </footer>
+
+    </section> -->
     
 </body>
 <script src="/app.js"></script>
