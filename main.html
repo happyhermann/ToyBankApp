@@ -9,20 +9,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
-
-
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css" /> 
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    
+ 
  </head>
 <body>  
 
-    
-
-    
+  
     <section class="bankApp">
-
-       
-
- 
             <header>
                 <div class="profile">
                     <img src="/images/아바타.svg" alt="Your Profile Image"/>
@@ -42,7 +37,12 @@
                     </div> 
                     <strong>1,240,000원</strong>
                     <div class="balance_Top_left">
-                        <div class="bar"></div>
+                        <div class="bar">
+                            <div id="progressBar" class="progressBar">
+                                <div class="progressBar_percent"></div>
+                            </div>
+                            <img class="progressBar_graph" src="/images/graph.svg" alt="graph"/>
+                        </div>
                         <h5>5일 동안 210,000원 남음</h5>
                     </div> 
                 </div>
@@ -56,15 +56,15 @@
                 <button class="upScroll"></button>
                 <ul class="saving_list">
                     <li class="saving_list_goal">
-                        <div class="saving_list_goal_progress">
+                        <div class="saving_list_goal_progress first">
                              <p>여행가자!</p>
                              <p>840,000원</p>
                         </div>
                     </li>
                     <li class="saving_list_goal">
-                        <div class="saving_list_goal_progress">
-                             <p>여행가자!</p>
-                             <p>840,000원</p>
+                        <div class="saving_list_goal_progress second">
+                             <p>냉장고 사기</p>
+                             <p>144,000원</p>
                         </div>     
                 </ul>
                 <ul class="history">
@@ -102,4 +102,6 @@
     
 </body>
 <script src="/app.js"></script>
-</html>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+ </html>
