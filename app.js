@@ -22,11 +22,10 @@ fetch("https://eulsoo.github.io/list.json")
 
 const history = document.querySelector(".history");
 
- 
-function 할일 (obj) {
+ function 할일 (obj) {
     const UL = document.querySelector('.list')
     const spendingText = document.querySelector('.history_spending')
-  
+    let sum = 0;
      
     for (let i = 0; i < obj.length; i++) {
         const creLi = document.createElement('LI');
@@ -35,6 +34,8 @@ function 할일 (obj) {
         const span2 = document.createElement("SPAN");
         span1.textContent = obj[i].item
         span2.textContent = obj[i].price
+        let price = obj[i].price;
+        sum = sum + price;
         creLi.style.borderBottom = "1px solid #dcdcdc";
         creLi.style.padding ="3px 17px"
         creLi.style.fontSize ="18px"
@@ -44,17 +45,14 @@ function 할일 (obj) {
         creLi.appendChild(span1);
         creLi.appendChild(span2);
         
-        var sum =+ obj[i].price
-        spendingText.textContent = sum += "지출";
-        
+     
     }
-  return sum;
-    
+    spendingText.textContent =  sum  + "지출";
 
+     
 };
- 
- 
- 
+
+           
 //  드랍다운 
 
 const main = document.querySelector(".bankApp")
