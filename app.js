@@ -130,7 +130,7 @@ function List(dateKey, obj) {
     DIV.appendChild(H3_2)
     DIV.className = "dateHeader"
     H3.textContent = `${dateKey}`;
-    H3_2.textContent = ` ${sum}`;
+    H3_2.textContent = ` 합계 ${sum}`;
     history.appendChild(DIV)
     const UL = document.querySelector('.list')
     const spendingText = document.querySelector('.history_spending')
@@ -247,8 +247,17 @@ function List(dateKey, obj) {
 const main = document.querySelector(".bankApp")
 const dropMenu = document.querySelector('.scroll');
 
+// 범위설정과 DOM 지정 
+// 바텀 시트 메뉴인 scroll 박스에는 position absolute를줬고  
+//  컨네이너인 bankApp 클래스를 부여한 dom 요소 (태그 section) 에 Position relative 속성를 줘서,  컨테이너 영역에서만 움직일 수 있도록 설정했습니다.
 
 
+
+// 그 다음으로 이동에 대한 동작 설정 
+
+// 1. 마우스 버튼 누르고 있는 것 
+// 2. 버튼을 누르는 순간 박스 이동 이벤트 발생 전역으로 알림 (버블링)
+// 3. 버블링과 동시에 컨테이너를 기준으로 마우스 좌표를 기억 (기준은 항상 왼쪽)
 
 const { width: mainWidth, height: mainHeight } =
     main.getBoundingClientRect();
@@ -263,19 +272,22 @@ let originY = null;
 
 
 dropMenu.addEventListener('mousedown', (e) => {
-    isDragging = true;
-    originX = e.clientX;
-    originY = e.clientY;
-    originLeft = dropMenu.offsetLeft;
-    originTop = dropMenu.offsetTop;
+    isDragging = true;  // 마우스 이동 시작 이벤트 window로 알림  (버블링?)
+    originX = e.clientX; // 브라우저를 기준 마우스 x축  (client는 브라우저에서 사용자에게 웹페이지 보여지는 영역 기준)
+    originY = e.clientY; // 브라우저를 기준 마우스 y축
+    originLeft = dropMenu.offsetLeft; // 컨테이너를 기준으로 바텀시트의 좌표 x
+    originTop = dropMenu.offsetTop; // 컨테이너를 기준으로 버텀시트의 좌표 y
 });
+
+//드래깅 true니까 이동가능 
+
 
 
 
 main.addEventListener("mouseup", (e) => {
     isDragging = false;
 });
-
+//마우스 버튼 뗐을때는 드래깅 false로 
 
 
 main.addEventListener('mousemove', (e) => {
@@ -286,11 +298,13 @@ main.addEventListener('mousemove', (e) => {
         const endOfYPoint = mainHeight - dropMenuHeight;
         dropMenu.style.left = `${Math.min(Math.max(0, originLeft + diffX), endOfXPoint)}px`
         dropMenu.style.top = `${Math.min(Math.max(0, originTop + diffY), endOfYPoint)}px`
-
+        //바텀 시트의 left와 Top 값이 음수 값이 되면 바텀 시트 메뉴가 컨테이너 밖으로 나갈 수 없게 설정 
     }
 });
 
+//문제 해결을 위한 
 
 
-// comment: 드래그 구현 아이디어 좋음. 아래에서 끌어올리는 팝업을 bottom sheet 라고 부르니 관련 예제를 찾아 완성도를 높여보면 좋을 것
-// comment: 시간이 촉박하면 드래그는 포기하고 100%펼쳐진 상태와 반쯤 들어간 상태 딱 두가지로 고정하돼 cubic-bezier 효과만 주는 것으로도 임팩트 주기 가능
+
+ // comment:  드래그는 포기하고 100%펼쳐진 상태와 반쯤 들어간 상태 딱 두가지로 고정하돼 cubic-bezier 효과만 
+//   주는 것으로도 임팩트 주는 것도 생각
