@@ -77,61 +77,60 @@ fetch("https://jytrack64.github.io/data.json")
     console.log(obj);
 })
 
-
+// comment: 변수명 history는 두가지 위험이 존재함.
+// comment: 1. 메모리 누수
+// comment:     1-1. const global; function(){global = [0,1,2]} 이렇게 전역변수 global과 global에 데이터를 할당하는 코드가 있다고 가정
+// comment:     1-2. 이 상태에서 여러 이유로 const global 선언부를 제거하면 에러가 날까?
+// comment:     1-3. 정답은 에러가 안난다. function(){global = [0,1,2]} 단독으로 있더라도 js는 자동으로 global이라는 전역변수를 선언하고 이곳에 데이터를 할당한다
+// comment:     1-4. 문제는 이렇게 선언없이 생성된(의도치 않게 생성된) 전역변수는 가비지 컬렉터에 의해 회수되지 않는다. 즉 메모리 누수의 원인이 된다.
+// comment: 2. js 기본객체와 중첩
+// comment:     2-1. history는 브라우저 주소를 관리하는 기본 객체이다. 이와 동일한 이름의 사용은 피하자
+// comment:     2-2. history.back() 과 같이 주소창을 관리하는데 쓰인다.
 
 
 const history = document.querySelector(".history");
 
-// function 거래(Data) {
-
-
-//     let yesterDay = Data.filter(function (e) {
-//         return true; e.date === "2022.5.1"
-
-
-//     })
-//     let toDay = Data.filter(function (e) {
-//         if (e.date === "2022.5.2") {
-//             return true;
-//         }
-
-//     })
-
  
-
-//     console.log(yesterDay)
-//     console.log(toDay);
-
-
-
-//     spendingText.textContent = sum + "    지출 ";
-
-
-// };
-
-
+// comment: obj는 실제로 Array 타입이 들어오고 있음. 따라서 파라미터명 역시 arr, list, values와 같이 배열임을 암시할 수 있도록 짓기를 권장
+// comment: 드물게 json object 또는 그외 모든 원시타입(any)을 의미하는 경우엔 obj라는 이름을 사용하기도 함
 
 function List(dateKey, obj) {
     if(new Date(dateKey).getDate() === new Date().getDate()) {
         dateKey = "오늘"
+// comment: 얕은복사에 대해 기억할 것임. 파라미터가 배열타입일 경우 위와 같은 코드는 호출한 쪽의 원본 데이터를 변경하는 사이드이펙트(부작용) 위험이 존재함
+        // comment: 이번 경우엔 dateKey가 (깊은복사가 되는) 단순 string 이므로 그런 위험이 없으나 평소 파라미터 값은 변경하지 않는 습관 들이길 권장함.
+        // comment: java나 typescript와 같은 여타 언어들에선 실수로라도 파라미터를 변경하지 못하도록 final, readonly와 같은 예약어를 제공하기도 함
 
 
+    } else if (new Date(dateKey).getDate() === new Date().getDate() -1) {
+        dateKey = "어제"
 
-    } 
+
+    }
     let sum = 0;
     for (let i = 0; i < obj.length; i++) {
         let price = obj[i].price;
 
         if (obj[i].inOut === "in") {
             sum = sum + price;
-        } if (obj[i].inOut === "out") {
+        } else if (obj[i].inOut === "out") {
             sum = sum - price;
+
+  // comment: 양자택일인 상황에선 else if 또는 삼항 연산자 가능. 위의 경우 'else' 누락
+  // comment: 삼항연산자 예시 => sum = (obj[i].inOut === 'in') ? (sum + price) : (sum - price);
+
+
         }
         
     }
     const DIV = document.createElement("DIV");
+    const H3 = document.createElement("H3")
+    const H3_2 = document.createElement("H3")
+    DIV.appendChild(H3)
+    DIV.appendChild(H3_2)
     DIV.className = "dateHeader"
-    DIV.textContent = `${dateKey} - 총합 ${sum}`;
+    H3.textContent = `${dateKey}`;
+    H3_2.textContent = ` ${sum}`;
     history.appendChild(DIV)
     const UL = document.querySelector('.list')
     const spendingText = document.querySelector('.history_spending')
@@ -240,7 +239,10 @@ function List(dateKey, obj) {
  
 
 
-//  드랍ㄹ다운 
+//  드랍다운 
+
+// comment: querySelector 사용시 첫번째 요소만 반환되며 그 순서는 보장되지 않음. 코드상 제일 위에 있는 태그라고 항상 그것만 선택되라는 법은 없음.
+// comment: 지금의 경우 .scroll이 여러개 임에도 맨 첫페이지만 먹히는 버그 발생
 
 const main = document.querySelector(".bankApp")
 const dropMenu = document.querySelector('.scroll');
@@ -290,3 +292,5 @@ main.addEventListener('mousemove', (e) => {
 
 
 
+// comment: 드래그 구현 아이디어 좋음. 아래에서 끌어올리는 팝업을 bottom sheet 라고 부르니 관련 예제를 찾아 완성도를 높여보면 좋을 것
+// comment: 시간이 촉박하면 드래그는 포기하고 100%펼쳐진 상태와 반쯤 들어간 상태 딱 두가지로 고정하돼 cubic-bezier 효과만 주는 것으로도 임팩트 주기 가능

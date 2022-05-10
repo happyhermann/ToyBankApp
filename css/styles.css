@@ -616,8 +616,12 @@ body {
 }
 
 .dateHeader {
-  text-align: left;
   font-size: 16px;
-  margin-bottom: 7px;
-  margin-top: 7px;
+  margin-top: 20px;
+  display: flex;
+  margin: 10px 17px;
+  margin-left: 5px;
+  margin-bottom: 15px;
+  margin-top: 15px;
+  justify-content: space-between;
 }
