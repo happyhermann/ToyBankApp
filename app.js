@@ -1,4 +1,20 @@
- 
+//  function readJson(file, callback) {
+//     var rawFile = new XMLHttpRequest();
+//     rawFile.overrideMimeType("application/json");
+//     rawFile.open("GET", file, true);
+//     rawFile.onreadystatechange = function () {
+//         if(rawFile.readyState === 4 && rawFile.status == "200") {
+//             callback(rawFile.responseText);
+//         }
+//     }
+//   rawFile.send(null);
+//  }
+
+//   readJson("./miniproject2.json", function (text) { 
+//   var Data = JSON.parse(text);
+//   console.log(Data);
+// });
+
 
 const 요청url = "https://eulsoo.github.io/list.json"
 const 요청객체 = new XMLHttpRequest();
@@ -47,7 +63,7 @@ const history = document.querySelector(".history");
         
      
     }
-    spendingText.textContent =  sum  + "지출";
+    spendingText.textContent =  sum  + "    지출 ";
 
      
 };
