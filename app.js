@@ -32,10 +32,40 @@ const 요청url = "https://jytrack64.github.io/data.json"
 const 요청객체 = new XMLHttpRequest();
 요청객체.open('GET', 요청url);
 요청객체.responseType = 'json';
-요청객체.send();
+요청객체.send(); 
 요청객체.onload = () => {
     const obj = 요청객체.response;
-    List(obj);
+    const groupedResult = groupByDate(obj);
+    console.log(groupByDate(obj));
+
+    const groupKeys = Object.keys(groupedResult)
+
+    for (let i=0; i<groupKeys.length-1; i++) {
+        const dateKey = groupKeys[i]
+        const groupedItems = groupedResult[dateKey]
+        List(dateKey, groupedItems)
+
+        
+    }
+
+    // List(obj);
+    // List(obj);
+    // 1. list 반복 
+}
+
+function groupByDate(itemList) {
+    const result = {};
+    for (let i = 0; i < itemList.length; i++) {
+      const date = itemList[i].date
+      if(result[date]) {
+          result[date].push(itemList[i])
+      } else {
+          result[date] = [itemList[i]];
+      }
+
+    }
+
+    return result;
 }
 
 
@@ -80,15 +110,35 @@ const history = document.querySelector(".history");
 // };
 
 
-function List(obj) {
 
+function List(dateKey, obj) {
+    if(new Date(dateKey).getDate() === new Date().getDate()) {
+        dateKey = "오늘"
+
+
+
+    } 
+    let sum = 0;
+    for (let i = 0; i < obj.length; i++) {
+        let price = obj[i].price;
+
+        if (obj[i].inOut === "in") {
+            sum = sum + price;
+        } if (obj[i].inOut === "out") {
+            sum = sum - price;
+        }
+        
+    }
+    const DIV = document.createElement("DIV");
+    DIV.className = "dateHeader"
+    DIV.textContent = `${dateKey} - 총합 ${sum}`;
+    history.appendChild(DIV)
     const UL = document.querySelector('.list')
     const spendingText = document.querySelector('.history_spending')
-    let sum = 0;
-
+    
     for (let i = 0; i < obj.length; i++) {
 
-
+        
         const creLi = document.createElement('LI');
         creLi.className = "creLi";
         const span1 = document.createElement("SPAN");
@@ -121,8 +171,54 @@ function List(obj) {
         }
     
     }
-       spendingText.textContent = `${sum}   지출`
+    //    spendingText.textContent = `${sum}   지출`
  }
+
+
+
+// function List(obj) {
+
+//     const UL = document.querySelector('.list')
+//     const spendingText = document.querySelector('.history_spending')
+//     let sum = 0;
+
+//     for (let i = 0; i < obj.length; i++) {
+
+
+//         const creLi = document.createElement('LI');
+//         creLi.className = "creLi";
+//         const span1 = document.createElement("SPAN");
+//         const span2 = document.createElement("SPAN");
+//         span1.textContent = obj[i].item
+//         // span2.textContent = obj[i].price
+//         let price = obj[i].price;
+//         creLi.style.borderBottom = "1px solid #dcdcdc";
+//         creLi.style.padding = "3px 17px"
+//         creLi.style.fontSize = "18px"
+//         creLi.style.fontWeight = "300";
+//         creLi.style.lineHeight = "27px";
+//         history.appendChild(creLi);
+//         creLi.appendChild(span1);
+//         creLi.appendChild(span2);
+
+//         if(obj[i].inOut === "in" )  {
+//             span2.textContent = `+ ${price}원`
+//             span2.style.color = "#008000";
+
+//           }  
+//           else if (obj[i].inOut ===     "out") {
+//             span2.textContent = `- ${price}원`
+//           }
+
+//         if (obj[i].inOut === "in") {
+//             sum = sum + price;
+//         } if (obj[i].inOut === "out") {
+//             sum = sum - price;
+//         }
+    
+//     }
+//        spendingText.textContent = `${sum}   지출`
+//  }
 
 
 

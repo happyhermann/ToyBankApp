@@ -614,3 +614,10 @@ body {
   -webkit-align-items: center;
   align-items: center;
 }
+
+.dateHeader {
+  text-align: left;
+  font-size: 16px;
+  margin-bottom: 7px;
+  margin-top: 7px;
+}
