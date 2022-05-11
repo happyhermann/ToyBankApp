@@ -89,24 +89,31 @@ fetch("https://jytrack64.github.io/data.json")
 
 
 const history = document.querySelector(".history");
+// 수입/지출 목록 DOM 변수 선언
 
  
-// comment: obj는 실제로 Array 타입이 들어오고 있음. 따라서 파라미터명 역시 arr, list, values와 같이 배열임을 암시할 수 있도록 짓기를 권장
-// comment: 드물게 json object 또는 그외 모든 원시타입(any)을 의미하는 경우엔 obj라는 이름을 사용하기도 함
+ // comment: 얕은복사?때는 파라미터가 배열타입일 경우 위와 같은 코드는 호출한 쪽의 원본 데이터를 변경하는 사이드이펙트(부작용) 위험이 존재함 
+// 그럼에도 불구하고 시간이 촉박한 관계로 배열같은 선형 자료 구조를 그대로 인자로 채택함 
 
 function List(dateKey, obj) {
-    if(new Date(dateKey).getDate() === new Date().getDate()) {
+
+    // 오늘과 어제에 한에서 grouping된 박스 최상단에 '날짜'를 "오늘" "어제" 스트링으로 변환
+    if(new Date(dateKey).getDate() === new Date().getDate()) { 
+
+        //new Date(); JS 내장 객체를 이용해서 실제 시간을 적용해보기로 함 생성자 new Date에 getDate() 메서드로 주어진 날짜의 현지 시간 기준 '일'을 받아옴 
+        //지출 날짜가 실제 시간과 일치하면 "오늘"
+
         dateKey = "오늘"
-// comment: 얕은복사에 대해 기억할 것임. 파라미터가 배열타입일 경우 위와 같은 코드는 호출한 쪽의 원본 데이터를 변경하는 사이드이펙트(부작용) 위험이 존재함
-        // comment: 이번 경우엔 dateKey가 (깊은복사가 되는) 단순 string 이므로 그런 위험이 없으나 평소 파라미터 값은 변경하지 않는 습관 들이길 권장함.
-        // comment: java나 typescript와 같은 여타 언어들에선 실수로라도 파라미터를 변경하지 못하도록 final, readonly와 같은 예약어를 제공하기도 함
 
 
     } else if (new Date(dateKey).getDate() === new Date().getDate() -1) {
         dateKey = "어제"
+        //getDate() -1 을 이용해서 어제를 걸러주는 조건문 else if에 부여 
 
 
     }
+
+    //날짜별 수입/지출 총합을 구하는 for loop
     let sum = 0;
     for (let i = 0; i < obj.length; i++) {
         let price = obj[i].price;
@@ -116,25 +123,30 @@ function List(dateKey, obj) {
         } else if (obj[i].inOut === "out") {
             sum = sum - price;
 
-  // comment: 양자택일인 상황에선 else if 또는 삼항 연산자 가능. 위의 경우 'else' 누락
-  // comment: 삼항연산자 예시 => sum = (obj[i].inOut === 'in') ? (sum + price) : (sum - price);
+  // comment: 양자택일인 상황에선 else if 또는 삼항 연산자 가능하기에 고민했음. 위의 경우 'else' 누락
+  // comment: 만약에 삼항연사자를 이용했다면  예시 => sum = (obj[i].inOut === 'in') ? (sum + price) : (sum - price); 해도 됐을 것 ) (가독성?)
+
 
 
         }
         
     }
+
+        // 날짜 / 총합 태그를 createElement로 생성 
     const DIV = document.createElement("DIV");
     const H3 = document.createElement("H3")
     const H3_2 = document.createElement("H3")
     DIV.appendChild(H3)
     DIV.appendChild(H3_2)
+    // DIV 박스에 appendChild를 통해 H3 태그 자식요소로 부여
     DIV.className = "dateHeader"
     H3.textContent = `${dateKey}`;
     H3_2.textContent = ` 합계 ${sum}`;
     history.appendChild(DIV)
-    const UL = document.querySelector('.list')
-    const spendingText = document.querySelector('.history_spending')
-    
+    //지출목록 컨테이너에 날짜 / 총합 태그 자식으로 부여 (최상단에 위치)
+
+    // 실질적인 지출 아이템 / 입출금 리스트는 forloop로 구현  
+ 
     for (let i = 0; i < obj.length; i++) {
 
         
@@ -154,72 +166,30 @@ function List(dateKey, obj) {
         creLi.appendChild(span1);
         creLi.appendChild(span2);
 
+   
+
+             //수입과 지출 표시부분 조건문으로 구분 
+
         if(obj[i].inOut === "in" )  {
             span2.textContent = `+ ${price}원`
             span2.style.color = "#008000";
 
           }  
+          // 키 inOut의 값이 in일 경우 + 스트링으로 표시하고 Green 색 style도 부여
+
           else if (obj[i].inOut ===     "out") {
             span2.textContent = `- ${price}원`
           }
 
-        if (obj[i].inOut === "in") {
-            sum = sum + price;
-        } if (obj[i].inOut === "out") {
-            sum = sum - price;
-        }
+        // 키 inOut의 값이 out일 경우 -로 표시함
+
+ 
     
     }
-    //    spendingText.textContent = `${sum}   지출`
- }
+  }
 
 
-
-// function List(obj) {
-
-//     const UL = document.querySelector('.list')
-//     const spendingText = document.querySelector('.history_spending')
-//     let sum = 0;
-
-//     for (let i = 0; i < obj.length; i++) {
-
-
-//         const creLi = document.createElement('LI');
-//         creLi.className = "creLi";
-//         const span1 = document.createElement("SPAN");
-//         const span2 = document.createElement("SPAN");
-//         span1.textContent = obj[i].item
-//         // span2.textContent = obj[i].price
-//         let price = obj[i].price;
-//         creLi.style.borderBottom = "1px solid #dcdcdc";
-//         creLi.style.padding = "3px 17px"
-//         creLi.style.fontSize = "18px"
-//         creLi.style.fontWeight = "300";
-//         creLi.style.lineHeight = "27px";
-//         history.appendChild(creLi);
-//         creLi.appendChild(span1);
-//         creLi.appendChild(span2);
-
-//         if(obj[i].inOut === "in" )  {
-//             span2.textContent = `+ ${price}원`
-//             span2.style.color = "#008000";
-
-//           }  
-//           else if (obj[i].inOut ===     "out") {
-//             span2.textContent = `- ${price}원`
-//           }
-
-//         if (obj[i].inOut === "in") {
-//             sum = sum + price;
-//         } if (obj[i].inOut === "out") {
-//             sum = sum - price;
-//         }
-    
-//     }
-//        spendingText.textContent = `${sum}   지출`
-//  }
-
-
+ 
 
 //  const getDatatoDate = (obj, date) => {
 //     return obj.filter((element) => {
