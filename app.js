@@ -36,14 +36,26 @@ const 요청객체 = new XMLHttpRequest();
 요청객체.onload = () => {
     const obj = 요청객체.response;
     const groupedResult = groupByDate(obj);
+    // 그룹핑된 grouByDate 함수를 groupedResult 변수에 할당
     console.log(groupByDate(obj));
 
+   
     const groupKeys = Object.keys(groupedResult)
+    // Object.keys 내장 메서드를 사용, 객체의 프로퍼티중 'date'만 string으로 추출 
 
+
+    //'날짜' 키를 dateKey에 할당후 전체 순회 
+    //'그루핑해주는 함수 groupByDate의 (리턴) 값을 할당한 groupedResult 
+    // 안에 날짜 객체 값을 받아와서 groupedItems 변수에 할당 
     for (let i=0; i<groupKeys.length-1; i++) {
         const dateKey = groupKeys[i]
         const groupedItems = groupedResult[dateKey]
         List(dateKey, groupedItems)
+
+        //그리고 두 변수를 List 함수에 파라미터로 전달하여 
+        // 입/출금 내역 리스트 만들 때 값으로 전달
+
+        //List 함수 forloop안에 선언
 
         
     }
@@ -54,7 +66,7 @@ const 요청객체 = new XMLHttpRequest();
 }
 
 function groupByDate(itemList) {
-    const result = {};
+    const result = {}; 
     for (let i = 0; i < itemList.length; i++) {
       const date = itemList[i].date
       if(result[date]) {
@@ -64,7 +76,7 @@ function groupByDate(itemList) {
       }
 
     }
-
+// for loop에서 한 데이트의 값으로 배열을 담습니다
     return result;
 }
 
@@ -230,7 +242,7 @@ const dropMenu = document.querySelector('.scroll');
 // 3. 버블링과 동시에 컨테이너를 기준으로 마우스 좌표를 기억 (기준은 항상 왼쪽)
 
 const { width: mainWidth, height: mainHeight } =
-    main.getBoundingClientRect();
+    main.getBoundingClientRect(); //엘리먼트의 크기와 뷰포트에 상대적인 위치 정보를 제공하는 DOMRect 객체를 반환
 const { width: dropMenuWidth, height: dropMenuHeight } =
     dropMenu.getBoundingClientRect();
 let isDragging = null;
@@ -238,6 +250,8 @@ let originLeft = null;
 let originTop = null;
 let originX = null;
 let originY = null;
+
+//아직 참조 변수가 없으니 null로 초기화
 
 
 
@@ -262,12 +276,16 @@ main.addEventListener("mouseup", (e) => {
 
 main.addEventListener('mousemove', (e) => {
     if (isDragging) {
-        const diffX = e.clientX - originX;
+        const diffX = e.clientX - originX; 
+        // 이동한 거리
         const diffY = e.clientY - originY;
+        // 이동한 거리 
         const endOfXPoint = mainWidth - dropMenuWidth;
         const endOfYPoint = mainHeight - dropMenuHeight;
         dropMenu.style.left = `${Math.min(Math.max(0, originLeft + diffX), endOfXPoint)}px`
         dropMenu.style.top = `${Math.min(Math.max(0, originTop + diffY), endOfYPoint)}px`
+        // 컨테이너 기준 처음 박스 좌표 + 이동한 거리 (x,y);
+        
         //바텀 시트의 left와 Top 값이 음수 값이 되면 바텀 시트 메뉴가 컨테이너 밖으로 나갈 수 없게 설정 
     }
 });
