@@ -36,8 +36,12 @@ const 요청객체 = new XMLHttpRequest();
 요청객체.onload = () => {
     const obj = 요청객체.response;
     const groupedResult = groupByDate(obj);
+    //array하나에 날짜별로 객체 걸러줄 함수먼저 선언
+    // result 배열값의 인자로 Obj 데이터 받아오고 grouping해주는 함수를 groupedResult라는 변수에 할당 
     console.log(groupByDate(obj));
 
+
+    //그루핑된 객체의 프로퍼티중 key 키값 즉, 프로퍼티 네임들만 묶어서 배열로 반환해주는 Object.keys(obj)를 변수에 할당
     const groupKeys = Object.keys(groupedResult)
 
     for (let i=0; i<groupKeys.length-1; i++) {
@@ -91,16 +95,20 @@ function groupByDate(itemList) {
 
 
       //증감될 때마다 조건문으로 걸러내는데 (result[date]는 객체니까 boolean 조건문 요소로 사용 가능, 만약 date라는 키가 있다면 true
-      // => result에 date )
+      // => result에 date 객체 push)
       if(result[date]) {
           result[date].push(itemList[i])
-      } else {
+
+          //날짜를 받아왔는데 객체가 비었다, 그러면 date에 객체 할당
+          // => 증감되고 if 조건문에 충족되기 때문에 다시 그 날짜에 해당하는 객체 할당 
+          //이렇게 데이터를 전부 순회하면서 날짜별로 객체를 그루핑하면서 끝 
           result[date] = [itemList[i]];
       }
 
     }
-
+4
     return result;
+    
 }
 
 
