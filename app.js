@@ -48,15 +48,50 @@ const 요청객체 = new XMLHttpRequest();
         
     }
 
-    // List(obj);
-    // List(obj);
-    // 1. list 반복 
+  
 }
+
+//날짜별로 grouping하는 함수로 먼저 필터링하고 시작
+//하나의 날짜에 객체가 들어간게 아니라 분산되어 있음 이것을 하나로 하는 작업이 필요했음
+
+// {
+//     "date":"2022.5.1",
+//     "inOut":"in",
+//     "type":"",
+//     "item":"용돈",
+//     "price":50000
+//  },
+  
+//     "date":"2022.5.1",
+//     "inOut":"out",
+//     "type":"mart",
+//     "item":"연필",
+//     "price":3000
+//  },
+//  {
+//     "date":"2022.5.2",
+//     "inOut":"out",
+//     "type":"eatout",
+//     "item":"광어회",
+//     "price":30000
+//  },
+// 
+//
+
+
 
 function groupByDate(itemList) {
     const result = {};
+    //result라는 빈 객체 선언 
+
+    //For loop itemList 인자에 Obj 받아와서 전체 반복 
     for (let i = 0; i < itemList.length; i++) {
       const date = itemList[i].date
+      //인데스를 이용해서 배열 처음부터 끝까지 순회하는데 date 키를 date 변수에 할당 
+
+
+      //증감될 때마다 조건문으로 걸러내는데 (result[date]는 객체니까 boolean 조건문 요소로 사용 가능, 만약 date라는 키가 있다면 true
+      // => result에 date )
       if(result[date]) {
           result[date].push(itemList[i])
       } else {
@@ -77,16 +112,10 @@ fetch("https://jytrack64.github.io/data.json")
     console.log(obj);
 })
 
-// comment: 변수명 history는 두가지 위험이 존재함.
-// comment: 1. 메모리 누수
-// comment:     1-1. const global; function(){global = [0,1,2]} 이렇게 전역변수 global과 global에 데이터를 할당하는 코드가 있다고 가정
-// comment:     1-2. 이 상태에서 여러 이유로 const global 선언부를 제거하면 에러가 날까?
-// comment:     1-3. 정답은 에러가 안난다. function(){global = [0,1,2]} 단독으로 있더라도 js는 자동으로 global이라는 전역변수를 선언하고 이곳에 데이터를 할당한다
-// comment:     1-4. 문제는 이렇게 선언없이 생성된(의도치 않게 생성된) 전역변수는 가비지 컬렉터에 의해 회수되지 않는다. 즉 메모리 누수의 원인이 된다.
-// comment: 2. js 기본객체와 중첩
-// comment:     2-1. history는 브라우저 주소를 관리하는 기본 객체이다. 이와 동일한 이름의 사용은 피하자
-// comment:     2-2. history.back() 과 같이 주소창을 관리하는데 쓰인다.
-
+ 
+// comment:     js 기본객체와 중첩
+// comment:     history는 브라우저 주소를 관리하는 기본 객체이다. 이와 동일한 이름의 사용은 피하기
+ 
 
 const history = document.querySelector(".history");
 // 수입/지출 목록 DOM 변수 선언
